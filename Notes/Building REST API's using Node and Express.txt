@@ -1,0 +1,19 @@
+REST API IN json
+
+GET /users -List of all users
+then we do 
+app.get("/api/users",(req,res)=>{
+    res.json(users);
+})
+
+GET /api/user/1  -Get user by id
+GET /api/user/2  -Get user by id
+
+The above thing is dynamic path parameters
+
+then we do 
+app.get("/api/users/:id",(req,res)=>{
+    const id = Number(req.params.id);                   //as this is in string format convert to Number
+    const user = users.find((user) => user.id === id);  //find the user that matches that id and return in json format
+    return res.json(user);
+})

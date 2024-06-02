@@ -1,0 +1,46 @@
+ Nodejs Architecture
+
+                     +---------------------------+
+                     |        Event Queue        |
+                     +---------------------------+
+                                   |
+                                   v
+                     +---------------------------+
+                     |        Event Loop         |
+                     +---------------------------+
+                            /        |        \
+                            v         v         v
+                     +----------+ +------------+ +----------+
+                     | Request  | | Synchronous | Blocking  |
+                     |          | |   Tasks     | Operations |
+                     +----------+ +------------+ +----------+
+                            \        |        /
+                            v       v       v
+                     +---------------------------+
+                     |           Libuv           |
+                     |(Handles Asynchronous Tasks)|
+                     +---------------------------+
+                                   |
+                                   v
+                     +---------------------------+
+                     |      Asynchronous Tasks   |
+                     +---------------------------+
+
+Thread Pool => key component of the libuv library,uses to handle asynchronous operations
+
+hread Pool
+Definition:=> The thread pool is a collection of worker threads 
+managed by libuv that perform asynchronous tasks in the background.
+
+Purpose:=> It allows Node.js to perform potentially blocking operations 
+asynchronously, without blocking the main event loop.
+
+Size:=> By default, the thread pool has a size of 4 threads, but this 
+can be configured via the UV_THREADPOOL_SIZE environment variable.
+
+Operations Handled by the Thread Pool
+File System Operations: Reading, writing, and other file system interactions.
+DNS Lookups: Resolving domain names.
+Compression: Operations such as zlib compression.
+Cryptographic Operations: Tasks like hashing and encryption.
+User-defined Tasks: Custom tasks that are offloaded to the thread pool using libraries like worker_threads.

@@ -1,0 +1,15 @@
+it means operation on files  create and read for example
+
+
+fs.readFile and this is async here a callback fun is need to be  added 
+fs.readFileSync  it is synch
+
+fs.writeFile
+fs.writeFileSync
+
+fs.appendFile
+fs.appendFileSync  //makes change in the existing file
+
+fs.copyFile   //copy content from one file to another
+
+fs.stats  //get the stats of the perticular file

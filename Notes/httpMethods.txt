@@ -1,0 +1,24 @@
+HTTP Methods:
+
+GET: Retrieve data from the server. (Typically used for fetching data)
+Example: Get a list of users or a specific user's details.
+
+POST: Send data to the server to create a new resource. (Data is usually sent in the request body)
+Example: Create a new user in the database.
+
+PUT: Send data to the server to update an existing resource. This usually replaces the entire resource.
+Example: Update user details (typically by specifying the user ID).
+
+DELETE: Remove a resource from the server.
+Example: Delete a user by ID.
+
+PATCH: Apply partial modifications to a resource. (Only the fields that need to be updated are sent)
+Example: Update only the user's email address or password.
+
+________________________________________________________
+CRUD Operations:                                        |
+Create: Corresponds to the POST method.                 |
+Read: Corresponds to the GET method.                    |
+Update: Corresponds to the PUT and PATCH methods.       |
+Delete: Corresponds to the DELETE method.               |    
+________________________________________________________|

@@ -1,0 +1,75 @@
+why express is needed?  (Fast, unopinionated, minimalist web framework for Node.js)
+1. Simplified Server-Side Development:
+Routing: Handles HTTP requests easily.
+Middleware: Manages tasks like logging and authentication.
+Scalability and Modularity:
+2. Breaks down applications into smaller, manageable parts.
+Supports clean code organization.
+3. Large number of plugins and libraries.
+Strong community support with plenty of resources.
+4. Lightweight and fast=> Built on Node.js's efficient architecture.
+5. Simple API that's easy to learn.
+6. Flexibility:
+No strict structure, adaptable to various projects.
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+how to use it 
+-import from express
+-create app (const app = express(); )  //app here is handler function 
+create routes as required like with required http method
+-(app.get("/", (req,res)=>{res.end("Home Page ")}))
+you can  also add query search for that specific url like for example
+-app.get("/about",(req,res)=>{
+  res.end(`This is ${req.query.name} and age is ${req.query.age} years old`)
+} )
+the above will print for url localhoast:8080/about?name=Animish&age=21
+now create server with port no using express
+
+-app.listen(8080,()=>{console.log("Server started!")})
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+now insted of this function Myhandler(req, res) {
+  // if (req.url == "/favicon.ico") return res.end();
+
+  const log = `${Date.now()}: ${req.method} ${req.url} New request made!\n`;
+  //.method to print the method type, .url to print the url and .end to end the response
+
+  // Read the request URL and parse it into a pathname and query object
+  const parsedUrl = url.parse(req.url, true);
+  const pathname = parsedUrl.pathname;
+  const query = parsedUrl.query;
+
+  // Write a new log entry to the text.txt file
+  fs.appendFile("./text.txt", log, (err) => {
+    if (err) {
+      console.error("Failed to write to file:", err);
+    }
+
+    // Respond based on the pathname
+    switch (pathname) {
+      case "/":
+        // Homepage
+        res.end("HomePage");
+        break;
+      case "/about":
+        // About page
+        res.end("I am Animish Chopade");
+        break;
+      case "/search":
+        // Search page
+        if (query.q) {
+          // If a search query is provided, display the result
+          res.end(`You searched for: ${query.q}`);
+        } else {
+          // If no search query is provided, display an error message
+          res.end("Please provide a search query using '?q=searchterm'");
+        }
+        break;
+      default:
+        // If the pathname is not recognized, display a 404 error
+        res.end("404 not Found!");
+    }
+  });
+} 
+
+
+we will use 

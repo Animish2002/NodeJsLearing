@@ -1,0 +1,28 @@
+Versioning is the practice of giving unique names or numbers to 
+different software versions. This helps identify each state of 
+the software
+
+example: "major.minor.patch" 
+4.18.2
+
+1st=> 4
+2nd=> 18
+3rd=> 2
+
+//3rdd part (Last part) = Minor Fixes (Optional)
+Latest -> 4.18.5
+
+//2nd part (middle part) = Recommended Bug Fix (Security Update)
+
+//3rd part () = Major Release (Breaking Update) 
+show not add to the existing code with different version
+
+^ this symbol => (carat symbol) this means that dont change the major verion 4 but can update 18.2 versions
+it will auto update last and middle updates as availbl
+
+~ this means i want to change any versions for major
+~4.18.1 ok
+~4.18.2 ok
+~4.18.3 ok
+
+~4.19.0 not ok

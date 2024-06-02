@@ -1,0 +1,25 @@
+1.) WHAT IS NODE.JS?
+node js gives us a run time environment to runn our code outside of the web-browser and it 
+helps in writting server side code enabling the creation of dynamic web server applications 
+and other server-side software.
+
+2.) TO RUN A JS CODE IN TERMINAL {node file_name}
+3.) THINGS WHICH ARE NOT REQUIRED AND WHICH ARR RELATED TO DOM manipulation are not in node.js
+
+4.) CONTAINS Crypto graphy , file handling etc are removed
+
+5.)npm init: npm intialize (makes a template file that helps to run over file/project)a config file
+
+6.)WHAT IS MODULES?
+=>divide the entire code base into small small modules it is moduler programming
+
+to  import modules or code from other page we use { require("file_directory and name") } ////important
+
+to export modules or code from current page we use { module.exports = "fun name" } /////important
+
+module.exports={funtions}
+
+exports.add = (a,b) => a+b;
+export.sub = (a,b) => a-b;
+
+same but it is an anonymous function that is been used

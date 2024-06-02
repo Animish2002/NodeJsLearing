@@ -1,0 +1,61 @@
+Diagram that explains the structure and workflow of a REST API (Representational State Transfer)
+
+\\\\\HTTP requests to perform CRUD (Create, Read, Update, Delete) operations on resources./////
+                         +--------------------+
+                         |      Client        |
+                         +--------------------+
+                                  |
+                                  | HTTP Request (GET, POST, PUT, DELETE, etc.)
+                                  v
+                         +--------------------+
+                         |    REST API Server |
+                         +--------------------+
+                                  |
+                +-----------------+-----------------+
+                |                 |                 |
+    +-----------+-----------+ +---+-----------+ +---+-----------+
+    |   Endpoint: /users    | | Endpoint: /   | | Endpoint: /   |
+    | +-------------------+ | | /users/{id}   | | /products     |
+    | | GET: List Users   | | | +-----------+ | | +------------+|
+    | | POST: Create User | | | | GET: User | | | | GET: List  ||
+    | +-------------------+ | | | PUT: Update| | | | Products  ||
+    |                       | | | DELETE:    | | | | POST:     ||
+    |                       | | | User       | | | | Create    ||
+    |                       | | +-----------+ | | | Product    ||
+    |                       | |               | | +------------+|
+    +-----------------------+ +---------------+ +---------------+
+                                  |
+                                  | Access/Manipulate Resources
+                                  v
+                         +--------------------+
+                         |     Database       |
+                         +--------------------+
+1. Client=> represents the user or another system making a request to the REST API.
+2. REST API Server=> server receives the HTTP requests, processes them, and interacts with the underlying resources.
+3. Endpoints => These are specific routes/URIs that define how the client can interact with different resources. 
+Each endpoint corresponds to a specific resource or a group of resources.
+    /users: Manages user-related operations.
+        GET /users: Retrieves a list of users.
+        POST /users: Creates a new user.
+
+    /users/{id}: Manages operations on a specific user identified by id.
+        GET /users/{id}: Retrieves a specific user by ID.
+        PUT /users/{id}: Updates a specific user by ID.
+        DELETE /users/{id}: Deletes a specific user by ID.
+
+/products: Manages product-related operations.
+        GET /products: Retrieves a list of products.
+        POST /products: Creates a new product.
+
+4. Database=> server interacts with the database to retrieve, store, update, or delete the data
+
+
+also important
+Statelessness
+=>   Each request from the client to the server must contain all the information needed to 
+     understand and process the request.
+     The server does not store any state about the client session on the server side.
+Client-Server Architecture
+=>   Separation of client and server concerns. 
+     The client is responsible for the user interface, and 
+     the server handles data storage and processing.

@@ -1,0 +1,27 @@
+creating a variable and acquiring it http from node library
+
+then creating http server using http.ccreateServer() where inside we pass a callback with to arguments
+res, req 
+
+then we add the listen to add port number like mostly 8000
+
+here code snippet
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  console.log("heey there!!!");
+  res.end("Server is running on port 8080!");
+});
+
+server.listen(8080, () => {
+  console.log("server started!!!");
+});
+
+
+now adding log using fs module to log in all the req been made to the server 
+const fs = require ("fs");
+ const log = `${Date.now()}: ${req.method} ${req.url} new request made!\n`;
+  fs.appendFile("./text.txt", log, (err, data) => {
+    res.end("Server is running on port 8080!");
+  });

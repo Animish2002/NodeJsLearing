@@ -1,0 +1,31 @@
+Node.js architecture
+
+Single-threaded Event Loop: operates on a single-threaded event loop,so it can handle one operation at a time
+but can manage multiple requests efficiently using callbacks
+
+Non-blocking I/O: So instead of waiting for a task to be completed and they it can work on other , it moves onto the next task
+this is called asynchrous programming , here it uses callback function to render the result after is completed
+
+Event Emitter: This is a core concept where objects (called emitters) send out events and other objects listen for and 
+respond to these events. Think of it like a radio station broadcasting signals (events) and radios picking them up
+
+Modules: Instead of making a big code base and woking on it divide the code into different modules 
+and import them using require("./") and use those modules
+
+
+/////////////More Deep concepts//////////////
+Event Queue => events are Queued to be processed by the event loop, when an async operation completes it sends an event to this 
+queue and node.js proccess these events as they were been added
+
+Event Loop => It constantly checks the event queue to see if there's any work to be done and processes these events
+
+Requests => often associated with HTTP requests. When a server receives a request, it places it into the event
+ queue to be handled by the event loop.
+
+Blocking operation => they are the one which stops the execution of further code until they are complete (sync operations) 
+
+Non-blocking Operations => allow the event loop to continue processing other events while waiting for the operation to complete.
+This is achieved using asynchronous callbacks, promises, or async/await.
+
+Libuv => multi-platform support library focuses on asynchronous I/O provides the event loop and handles all the asynchronous behavior, 
+including file system operations, DNS, network operations,

@@ -1,0 +1,16 @@
+url => uniform resource locator
+ex: https://www.amazon.in/
+
+meaning
+https=>www.amazon.in=>/
+protocal=>domain=>it is the path (also has nested paths as well)
+
+1. https => it is protocal hyper text transfer protocol (secure) encyrpted hota hai  
+set of rules which tells browser how  to communicate with the server
+
+2. www => domain user friendly name of IP address of our server.
+
+///important very
+3. query parameters => https://www.youtube.com/results?search_query=search+query
+here after .com/ the remain thing is a search query 
+they are the key value pairs, we start it with ? and use & to seperate it out

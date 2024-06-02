@@ -1,0 +1,16 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "NEW Learning",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Animish Chopade",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "url": "^0.11.3"
+  }
+}

@@ -30,17 +30,36 @@ app.get("/api/users", (req, res) => {
 app
   .route("/api/user/:id")
   .get((req, res) => {
-    const id = Number(req.params.id);
-    const user = users.find((user) => user.id === id);
-    return res.json(user);
+    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
+    const user = users.find((user) => user.id === id); // Finds the user with the matching ID in the users array.
+    if (!user) return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
+    res.json(user); // If found, return the user data in JSON format.
   })
+
   .patch((req, res) => {
-    //it is used to update user
-    return res.json({ status: "Pending" });
+    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
+    const userIndex = users.findIndex((user) => user.id === id); // Finds the index of the user with the matching ID.
+    if (userIndex === -1)
+      return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
+    users[userIndex] = { ...users[userIndex], ...req.body }; // Update the user object with the new data from the request body.
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+      // Write the updated users array back to the JSON file.
+      if (err) return res.status(500).json({ error: "Internal Server Error" }); // If there's an error writing the file, return a 500 error.
+      res.json({ status: "Success", user: users[userIndex] }); // If successful, return the updated user data.
+    });
   })
+
   .delete((req, res) => {
-    //it is used to delete user
-    return res.json({ status: "Pending" });
+    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
+    const userIndex = users.findIndex((user) => user.id === id); // Finds the index of the user with the matching ID.
+    if (userIndex === -1)
+      return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
+    users.splice(userIndex, 1); // Remove the user from the users array.
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
+      // Write the updated users array back to the JSON file.
+      if (err) return res.status(500).json({ error: "Internal Server Error" }); // If there's an error writing the file, return a 500 error.
+      res.json({ status: "Success", message: "User deleted successfully" }); // If successful, return a success message.
+    });
   });
 
 app.post("/api/user", (req, res) => {

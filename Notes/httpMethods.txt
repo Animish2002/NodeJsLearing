@@ -15,6 +15,11 @@ Example: Delete a user by ID.
 PATCH: Apply partial modifications to a resource. (Only the fields that need to be updated are sent)
 Example: Update only the user's email address or password.
 
+PUT: This method is used to update a resource with a new version of the resource. 
+It generally replaces the entire resource with the data provided in the request.
+
+PATCH: This method is used to apply partial modifications to a resource. 
+It is more flexible and efficient for updating a resource's subset of fields.
 ________________________________________________________
 CRUD Operations:                                        |
 Create: Corresponds to the POST method.                 |

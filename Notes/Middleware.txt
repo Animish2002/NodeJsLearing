@@ -1,0 +1,28 @@
+Client Request
+     |                                                //  Client Request: The client sends a request to the server.
+     v
++-----------+
+| Middleware|
+| Function 1|  --> (req, res, next)                 //Middleware Function 1: The first middleware function processes the request. 
++-----------+                                       //It can perform various operations like logging, authentication, or modifying
+     |
+     v
++-----------+
+| Middleware|
+| Function 2|  --> (req, res, next)                 //Middleware Function 2: The second middleware function performs its operations 
++-----------+                                       //and then calls the next middleware function.
+     |
+     v
++-----------+
+| Middleware|                               
+| Function 3|  --> (req, res, next)                 //Middleware Function 3: Similarly, the third middleware function processes 
++-----------+                                       //the request and calls the next function.
+     |
+     v
++-----------+
+|   Route   |
+|  Handler  |  --> (req, res)                  //Route Handler:handles the request, processes it (e.g., fetching data from a database), 
++-----------+                                  //and sends a response back to the client.
+     |
+     v
+Client Response

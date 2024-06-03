@@ -1,0 +1,30 @@
+HTTP headers are key-value pairs included in an HTTP request or response
+provide info about request or response, such as the type of content, the server, and client details
+
+In this diagram:
+
+The client sends a request to the server with headers like Host, User-Agent, and Accept.
+The server responds with headers like Content-Type, Content-Length, and Server.
+
+______________________________________________________
+                                                      |
+Client (Browser)         Server (Website)             |
+----------------         -----------------            |
+                                                      |
+Request:                                              |
+GET /index.html HTTP/1.1                              |
+Host: example.com                                     |          
+User-Agent: Mozilla/5.0                               |
+Accept: text/html                                     |
+                                                      |
+                  ------>                             |
+                                                      |
+Response:                                             |
+HTTP/1.1 200 OK                                       |
+Content-Type: text/html                               |
+Content-Length: 1234                                  |
+Server: Apache/2.4                                    |
+                                                      |
+                  <------                             |
+                                                      |
+______________________________________________________|

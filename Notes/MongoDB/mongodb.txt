@@ -1,0 +1,29 @@
+MongoDB is a NoSQL database
+
+stores data in flexible, JSON-like documents, making it easy to work with hierarchical data
+
+How it Works
+Document-Oriented: Data is stored in documents within collections (similar to rows in tables).
+Schema-less: Each document can have a different structure.
+Scalable: Designed to scale out across many servers.
+
+Some Basic commands 
+
+Connecting to MongoDB => mongo
+Show Databases => show dbs
+Switch to a Database => use database_name
+Show Collections => show collections
+
+
+
+Insert a Document => db.collection_name.insertOne({ name: "Alice", age: 25 })
+
+Find Documents => db.collection_name.find()
+
+Update a Document => db.collection_name.updateOne(
+    { name: "Alice" },
+    { $set: { age: 26 } }
+)
+
+Delete a Document => db.collection_name.deleteOne({ name: "Alice" })
+

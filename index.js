@@ -1,9 +1,46 @@
 const express = require("express");
-const users = require("./MOCK_DATA.json");
+
 const fs = require("fs");
+const mongoose = require("mongoose");
+const { type } = require("os");
 
 const app = express();
 const PORT = 8080;
+
+//Connection with mongodb
+mongoose
+  .connect("mongodb://127.0.0.1:27017/youtube-app-1")
+  .then(() => console.log("Mongodb Connected!!!"))
+  .catch((err) => console.log("Mongo Error", err));
+
+//schema defined
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    gender: {
+      type: String,
+    },
+    jobTitle: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
+
+//model defined
+const User = mongoose.model("User", userSchema); // using the User model created here we can perform CRUD operations
 
 //middleware  => yeh jo form data ata hai usse body mai add krne ka kaam karta hai
 app.use(express.urlencoded({ extended: false }));
@@ -12,57 +49,44 @@ app.get("/", (req, res) => {
   res.end("Home Page");
 });
 
-app.get("/users", (req, res) => {
+app.get("/users", async (req, res) => {
   //this  is server side rendering
+  const allDbUsers = await User.find({});
   const html = `
   <ul>
-  ${users.map((user) => `<li>${user.first_name}</li> `).join("")}
+  ${allDbUsers
+    .map((user) => `<li>${user.firstName} - ${user.email}</li> `)
+    .join("")}
   </ul>`;
   res.send(html);
 });
 
-app.get("/api/users", (req, res) => {
+app.get("/api/users", async (req, res) => {
   //GET ALL USERS
-  return res.json(users); // return all the users in json format
+  const allDbUsers = await User.find({});
+  return res.json(allDbUsers); // return all the users in json format
 });
 
 //for same route we can use get,put,delete
 app
   .route("/api/user/:id")
-  .get((req, res) => {
-    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
-    const user = users.find((user) => user.id === id); // Finds the user with the matching ID in the users array.
+  .get(async (req, res) => {
+    const user = await User.findById(req.params.id); // Extracts the user ID from the URL and converts it to a number.
     if (!user) return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
     res.json(user); // If found, return the user data in JSON format.
   })
 
-  .patch((req, res) => {
-    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
-    const userIndex = users.findIndex((user) => user.id === id); // Finds the index of the user with the matching ID.
-    if (userIndex === -1)
-      return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
-    users[userIndex] = { ...users[userIndex], ...req.body }; // Update the user object with the new data from the request body.
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
-      // Write the updated users array back to the JSON file.
-      if (err) return res.status(500).json({ error: "Internal Server Error" }); // If there's an error writing the file, return a 500 error.
-      res.json({ status: "Success", user: users[userIndex] }); // If successful, return the updated user data.
-    });
+  .patch(async (req, res) => {
+    await User.findByIdAndUpdate(req.params.id, { lastName: "Chopade" });
+    res.json({ status: "Success" }); // If successful, return the updated user data.
   })
 
-  .delete((req, res) => {
-    const id = Number(req.params.id); // Extracts the user ID from the URL and converts it to a number.
-    const userIndex = users.findIndex((user) => user.id === id); // Finds the index of the user with the matching ID.
-    if (userIndex === -1)
-      return res.status(404).json({ error: "User not found" }); // If the user is not found, return a 404 error.
-    users.splice(userIndex, 1); // Remove the user from the users array.
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err) => {
-      // Write the updated users array back to the JSON file.
-      if (err) return res.status(500).json({ error: "Internal Server Error" }); // If there's an error writing the file, return a 500 error.
-      res.json({ status: "Success", message: "User deleted successfully" }); // If successful, return a success message.
-    });
+  .delete(async (req, res) => {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ status: "Success", message: "User deleted successfully" }); // If successful, return a success message.
   });
 
-app.post("/api/user", (req, res) => {
+app.post("/api/user", async (req, res) => {
   //it is used to create new user
   const body = req.body;
   if (
@@ -75,10 +99,16 @@ app.post("/api/user", (req, res) => {
   ) {
     return res.status(400).json({ msg: "All fields are required" });
   }
-  users.push({ ...body, id: users.length + 1 });
-  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.json({ status: "Pending", id: users.length });
+  const result = await User.create({
+    // this will create the user
+    firstName: body.first_name,
+    lastName: body.last_name,
+    email: body.email,
+    gender: body.gender,
+    jobTitle: body.job_title,
   });
+  console.log("result", result);
+  return res.status(201).json({ msg: "Success!" });
 });
 
 app.listen(PORT, () => {

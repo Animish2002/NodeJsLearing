@@ -1,0 +1,25 @@
+first me need to define the scheme (the structure of the database)
+    define a model using that schema
+    then perform CURd operations using the model
+
+    //MongoDB Connection
+mongoose.connect("....Database link..../dbname")
+.then(()= consolel.log("Mongo Connected!!!"));
+.catch(()=> console.log("Mongo error", err));
+
+
+     //schema defined
+const userSchema = new mongoose.Schema({        
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+
+});
+
+    //model defined
+const User = mongoose.model("User", userSchema);     // using the User model created here we can perform CRUD operations

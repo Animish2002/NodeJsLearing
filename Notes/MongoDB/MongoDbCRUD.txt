@@ -1,0 +1,64 @@
+//first install mongoose
+npm i mongoose
+
+//import it
+const mongoose = require("mongoose");
+
+
+//connection with the database / MongoDB
+mongoose.connect("mongodb://127.0.0.1:27017/youtube-app-1")
+.then(()=>console.log("Connected to MongoDb"))
+.catch((err)=>console.log("Error",err));
+
+//Create a schema
+const userSchema = new mongoose.schema({
+    {
+        Name:{
+            type:String,
+            required:true,
+        },
+        email:{
+            type:String,
+            required:true,
+            unique: true,
+        }
+    }
+})    
+
+
+//Create model  => creates a model named User based on the userSchema
+cons User = mongoose.model("User", userSchema);   and pass here the schema as well
+
+
+Now the CRUD operations 
+
+//post
+app.post("./api/user",(req,res)=>{
+    //used to create a new user
+    const body = req.body;
+    if(
+        !body.name ||
+        !body.email
+    )
+    {
+        return res.status(404).json({msg: "All fields are required!!!"});
+    }
+    const result = await User.create({
+        name: body.Name,
+        email: body.email,
+    });
+    return res.status(201).json({msg: "new user created!!!"});
+})
+
+
+//GET all users
+app.get("./api/users", async (req,res)  =>{
+    const dbusers = await User.find({});
+    res.json(dbusers);
+})
+
+
+//GET By id
+app.get("./api/users/:id",(req,res) async =>{
+
+})

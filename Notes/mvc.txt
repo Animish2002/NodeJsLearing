@@ -1,0 +1,34 @@
+Model-View-Controller=> design pattern for software projects.
+
+
+Components:
+
+Model:
+
+- Represents the data and the business logic of the application.
+- Manages data, logic, and rules of the application.
+- Example: Database schemas, business rules, data validation.
+
+View:
+
+- Represents the UI (User Interface) of the application.
+- Displays data from the Model to the user and sends user commands to the Controller.
+- Example: HTML, CSS, templates.
+
+Controller:
+
+- Acts as an intermediary between Model and View.
+- Processes user input from the View, manipulates the Model, and updates the View.
+- Example: Routes, HTTP request handling.
+
++-------------+        +-------------+        +-------------+
+|             |        |             |        |             |
+|    Model    <--------> Controller  <-------->    View     |
+|             |        |             |        |             |
++-------------+        +-------------+        +-------------+
+Workflow:
+
+1. User interacts with the View.
+2. Controller handles the user input and invokes Model changes.
+3. Model updates based on Controller logic.
+4. View updates based on Model changes and presents the updated data to the user.

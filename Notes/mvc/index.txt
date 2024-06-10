@@ -1,0 +1,8 @@
+what we did in this code is that we decided a basic flow
+
+where
+1st connect mongo db => here for the connection.js file just did connection to the url thats it
+
+2nd initialize middlewares =>
+
+3rd initialize routes

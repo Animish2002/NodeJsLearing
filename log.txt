@@ -1,0 +1,30 @@
+
+1718041962869: ::1 GET /api/users New request made!
+
+1718042015556: ::1 POST /api/user New request made!
+
+1718042021317: ::1 POST /api/users New request made!
+
+1718042039817: ::1 GET /api/users New request made!
+
+1718042061700: ::1 GET /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042143026: ::1 PATCH /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042148518: ::1 GET /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042172070: ::1 GET /api/users New request made!
+
+1718042203715: ::1 DELETE /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042231027: ::1 PATCH /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042244870: ::1 GET /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042255535: ::1 GET /api/users/66673da5a2cb1b8227c12d99 New request made!
+
+1718042266530: ::1 GET /api/users New request made!
+
+1718042293755: ::1 PATCH /api/users/665f123925907396e1d8b12d New request made!
+
+1718042298293: ::1 GET /api/users New request made!

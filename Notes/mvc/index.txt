@@ -1,8 +1,13 @@
 what we did in this code is that we decided a basic flow
 
 where
-1st connect mongo db => here for the connection.js file just did connection to the url thats it
 
-2nd initialize middlewares =>
+first we accquired express then
 
-3rd initialize routes
+✅1st connect mongo db => here for the connection.js file just did connection to the url thats it
+
+✅2nd initialize middlewares => created index.js file where we imported fs module and there we are appending the file with the ip,req made method , url for the log file
+
+✅3rd initialize routes => created i base route /api/users/ after users pe req jayega  
+created a routes page named user.js where imported the handle functions for different crud operations for different urls like "/" for get all and post from user.js controller
+ and "/:id" for patch , delete, getByid 

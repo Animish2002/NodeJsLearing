@@ -1,6 +1,6 @@
 const fs = require("fs");
 function logReqRes(filename) {
-  return (rq, res, next) => {
+  return (req, res, next) => {
     fs.appendFile(
       filename,
       `\n${Date.now()}: ${rq.ip} ${rq.method} ${rq.path} New request made!\n`,

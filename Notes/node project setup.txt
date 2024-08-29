@@ -1,0 +1,6 @@
+npm init
+npm install express
+npm install mongoose
+npm install hbs
+npm install nodemon
+npm i jsonwebtoken bcrypt body-aprser dotenv joi cors

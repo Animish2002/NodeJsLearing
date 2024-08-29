@@ -1,0 +1,15 @@
+Steps to Create API Endpoints (POST, PUT, GET, DELETE) in Node.js
+1. Create a Schema:
+Define the structure and data types of the data you will be sending or receiving.
+
+2. Create a Model:
+Create a model based on the schema to interact with the database.
+
+3. Create Routes:
+Define the API endpoints and the HTTP methods (GET, POST, PUT, DELETE) to interact with the resource.
+
+4. Create Controller Functions:
+Define the functions that will handle the logic for each route.
+
+5. Add Routes to the Main File:
+Integrate the routes into the main application file to make them accessible.

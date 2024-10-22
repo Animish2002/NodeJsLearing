@@ -43,4 +43,4 @@ File System Operations: Reading, writing, and other file system interactions.
 DNS Lookups: Resolving domain names.
 Compression: Operations such as zlib compression.
 Cryptographic Operations: Tasks like hashing and encryption.
-User-defined Tasks: Custom tasks that are offloaded to the thread pool using libraries like worker_threads.
+User-defined Tasks: Custom tasks that are offloaded to the thread pool using libraries like worker_thread

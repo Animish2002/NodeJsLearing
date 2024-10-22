@@ -1,0 +1,85 @@
+nodejs is a javascript runtime environment for executing JavaScript code on the server, outside of a web browser.
+Node.js is not synchronous by default: It is asynchronous and event-driven. While JavaScript is single-threaded, 
+Node.js uses an event loop to handle asynchronous operations, allowing it to execute non-blocking tasks efficiently.
+
+it has javascript v8 engine which excutes all the javascript code and all the things related to os
+like  setTimeout, file operations, api calls are been made with libuv
+
+JavaScript code runs on a main thread, which contains a call stack where code is pushed during execution. 
+When JavaScript code runs, a global execution context is created in two phases: memory allocation and code
+execution.
+
+Memory is allocated to all the variables, and functions are stored as references. 
+Then, the code is executed line by line.
+
+A memory heap is used for dynamic memory allocation, and V8 includes a garbage collector
+for memory management.
+
+all the async tasks like api call, settimeout, file reading or writting tasks which are block 
+the main thread are been handed over to libuv to be excuted so that other nonblocking code can be excuted 
+
+DIAGRAM EXPLANATION 
++-------------------------------------------------------------+
+|                           Node.js                           |
+|                                                             |
+|  +------------------+    +-------------------------------+  |
+|  |  JavaScript V8   |    |            libuv              |  |
+|  |     Engine       |    |     (Handles async tasks)     |  |
+|  +--------+---------+    +---------------+---------------+  |
+|           |                              |                  |
+|           |                              |                  |
+|    +------v------+        +--------------v---------------+  |
+|    |  Call Stack  |        |        Event Loop           |  |
+|    | (Executes    |        |   (Monitors async tasks)    |  |
+|    |  code)       |        +--------------+--------------+  |
+|    +------+-------+                       |                 |
+|           |                               |                 |
+|           |                               |                 |
+|    +------v-------+          +------------v-----------+     |
+|    |   Memory     |          |   Task Queue           |     |
+|    |   Heap       |          |   (Holds completed     |     |
+|    | (Stores      |          |    async tasks)        |     |
+|    |  objects     |          +------------------------+     |
+|    |  & variables)|                                         |
+|    +--------------+                                         |
++-------------------------------------------------------------+
+
+1. JavaScript code is pushed onto the Call Stack for execution.
+2. The V8 Engine handles the execution of code on the Call Stack.
+3. Asynchronous tasks (like I/O operations) are handed over to libuv.
+4. The Event Loop continuously checks if the Call Stack is empty.
+5. Once the Call Stack is clear, completed async tasks from the Task Queue are pushed to the Call Stack for execution.
+6. Memory Heap is used for dynamic memory allocation, managed by V8.
+
+
++-----------------------------------------------------------+
+|                           Node.js                         |
+|                                                           |
+|  +------------------+       +--------------------------+  |
+|  |  V8 JS Engine    |       |         libuv            |  |
+|  |                  |       |                          |  |
+|  | +--------------+ |       |  +--------------------+  |  |
+|  | | Call Stack   | |       |  | Event Loop         |  |  |
+|  | +--------------+ |       |  +--------+-----------+  |  |
+|  |                  |       |           |              |  |
+|  | +--------------+ |       |  +--------v-----------+  |  |
+|  | | Memory Heap  | |       |  | Callback Queue     |  |  |
+|  | +--------------+ |       |  +--------------------+  |  |
+|  |                  |       |                          |  |
+|  | +--------------+ |       |  +--------------------+  |  |
+|  | | Garbage      | |       |  | Thread Pool         | |  |
+|  | | Collector    | |       |  | (4 threads)         | |  |
+|  | +--------------+ |       |  +--------------------+  |  |
+|  +------------------+       +--------------------------+  |
+|                                                           |
+|                         Asynchronous I/O                  |
+|                   (Non-blocking operations)               |
+|                                                           |
++-----------------------------------------------------------+
+                                |
+                                v
++-----------------------------+-----------------------------+
+|                             |                             |
+|            OS               |      File System,           |
+|      (Operating System)     |  Network Requests, Timers   |
++-----------------------------+-----------------------------+

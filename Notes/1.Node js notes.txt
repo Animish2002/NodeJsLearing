@@ -23,3 +23,16 @@ exports.add = (a,b) => a+b;
 export.sub = (a,b) => a-b;
 
 same but it is an anonymous function that is been used
+
+common js modules => (cjs) module.export and require(), by default add in nodejs projects ,older way
+ES modules => (mjs) used in react , new way  
+ 
+
+Imp
+1. cjs runs in strict mode which means we cannot define
+    variables without declaring them first
+
+2. mjs code runs in non-strict mode variable without using var , let , or
+    const , and the code will execute without throwing an error
+
+3. module.exports is an empty object by default 

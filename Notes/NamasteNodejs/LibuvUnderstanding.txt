@@ -1,0 +1,81 @@
+It is a C-based library that facilitates the event-driven architecture of Node.js, 
+allowing it to perform I/O operations efficiently without blocking the main thread. 
+
+   +------------+---------------+
+   |                            |
+   |          libuv             |
+   |                            |  
+   |  +----------------------+  |
+   |  |     EVENT LOOP       |  |
+   |  +----------+-----------+  |
+   |             |              |
+   |  +----------v-----------+  |
+   |  |   Callback Queue     |  |   there seprate queues for each phase timer, api fetching, 
+   |  +----------------------+  |   file operations, process.nextTick(), promiseCallbacks
+   |                            |
+   |  +----------------------+  |
+   |  |   THREAD POOL        |  |
+   |  |  (4 threads)         |  |
+   |  +----------------------+  |
+   +------------+---------------+
+
+Event Loop => The event loop in libuv has multiple phases, each dedicated to a specific type of task:
+(only job of event loop is to keep checking the callstack and callback Queue)
+it checks if the callstack is empty (when is ideal or main thread is not blocked) or 
+not if it is then it assigns callback (task) from the callback Queue.
+                      +-------------------+
+                      |     TIMER         |
+                      |                   |
+                      | setTimeout,       |
+                      | setInterval       |
+                      +---------+---------+
+                                |
+                                v
+                      +-------------------+
+                      |       POLL        |
+                      |                   |
+                      | I/O Callbacks     |
+                      | -> incoming       |
+                      |    connections    |
+                      | -> data (fs,      |
+                      |    crypto, etc.)  |
+                      +---------+---------+
+                                |
+                                v
+                      +-------------------+
+                      |      CHECK        |
+                      |                   |
+                      | setImmediate      |
+                      +---------+---------+
+                                |
+                                v
+                      +-------------------+
+                      |      CLOSE        |
+                      |                   |
+                      | .on("close")      |
+                      +---------+---------+
+                                |
+                                v
+                      +-------------------+
+                      |  Callback Queues  |
+                      +-------------------+
+Flow:
+->process.nextTick -> process Callback -> TIMER 
+->process.nextTick -> process Callback -> POLL 
+->process.nextTick -> process Callback -> CHECK 
+->process.nextTick -> process Callback -> CLOSE (repeats in this order)
+
+
+if all tasks are completed togther at the same time then it has mechanism that it follows to do it :
+
+- Timer Phase = Executes callbacks for all timers (e.g., setTimeout and setInterval) whose wait time has expired.
+- Poll Phase = executes I/O callbacks, such as network operations. (file operations, api calls)
+- Check Phase =  Executes setImmediate callbacks.
+- Close Callback Phase = Handles close events, such as closing a network socket.
+
+Additional Details:
+- `process.nextTick()` and `promise callbacks` are executed before each phase.
+
+
+Callback Queue => Completed asynchronous tasks are placed in the callback queue. 
+When the event loop detects an empty call stack, it will execute callbacks from this queue.

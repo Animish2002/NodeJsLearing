@@ -20,7 +20,7 @@ show not add to the existing code with different version
 ^ this symbol => (carat symbol) this means that dont change the major verion 4 but can update 18.2 versions
 it will auto update last and middle updates as availbl
 
-~ this means i want to change any versions for major
+~  (tilde) this means i want to change any versions for major
 ~4.18.1 ok
 ~4.18.2 ok
 ~4.18.3 ok

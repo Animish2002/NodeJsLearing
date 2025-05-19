@@ -77,5 +77,12 @@ Additional Details:
 - `process.nextTick()` and `promise callbacks` are executed before each phase.
 
 
-Callback Queue => Completed asynchronous tasks are placed in the callback queue. 
+Callback Queue => Completed asynchronous tasks are placed in the callback queue.
 When the event loop detects an empty call stack, it will execute callbacks from this queue.
+
+
+Thread Pool => libuv uses a thread pool for tasks that are not inherently asynchronous 
+(e.g., file system operations). When Node.js makes a request to perform a 
+blocking operation, libuv assigns it to one of the threads in the pool. 
+Once the task is complete, 
+a callback is added to the event loop to handle the result.
